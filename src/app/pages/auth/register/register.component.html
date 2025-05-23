@@ -108,7 +108,7 @@
     </div>
     <!-- End Alert error section -->
 
-    
+
     <!-- Formulaire -->
     <div class="p-6">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -223,7 +223,12 @@
           <!-- Bouton -->
           <button
             type="submit"
-            class="w-full bg-[#ff9000] text-white font-semibold py-2 rounded hover:bg-orange-600 transition duration-200"
+            [disabled]="registerForm.invalid"
+            [ngClass]="{
+            'bg-[#ff9000] text-white border border-[#ff9000] hover:bg-[#e57f00]': registerForm.valid,
+            'bg-white text-gray-400 border border-gray-300 cursor-not-allowed': registerForm.invalid
+             }"
+            class="w-full py-2 px-4 rounded-md font-semibold transition-colors duration-300"
           >
             Créer un compte
           </button>
