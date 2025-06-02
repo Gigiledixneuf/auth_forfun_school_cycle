@@ -10,8 +10,8 @@ import {
 } from '@angular/forms';
 
 import { Router, RouterLink } from '@angular/router'; // Pour la navigation
-import { AuthService } from '../../../core/services/auth.service'; // Service d'authentification personnalisé
-import {NgClass, NgIf} from '@angular/common'; // Pour afficher ou cacher des blocs HTML conditionnellement
+import { NgClass, NgIf } from '@angular/common'; // Pour afficher ou cacher des blocs HTML conditionnellement
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 // Déclaration du composant Angular
 @Component({
@@ -63,10 +63,10 @@ export class RegisterComponent implements OnInit {
   // Fonction appelée lors de la soumission du formulaire
   onSubmit(): void {
     // Marque le formulaire comme soumis
-    this.submitted = true;
+    this.submitted = true; 
 
-    // Réinitialise les messages
-    this.errorMessage = '';
+    // Réinitialise les messages     
+    this.errorMessage = '';     
     this.successMessage = '';
 
     // Si le formulaire est invalide, on arrête l’exécution
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
         email: formData.email,
         password: formData.password,
         password_confirmation: formData.password_confirmation,
-        role: 'tutor',
+        role: 'tutor', 
       })
       .subscribe({
         // En cas de succès : affiche un message et réinitialise le formulaire
