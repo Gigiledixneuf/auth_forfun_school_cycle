@@ -1,0 +1,14 @@
+h1{
+    font-size: 200px;
+}
+div{
+    background-color: #FEFCFB;
+}
+.btn{
+    padding: 10px 15px;
+    border: none 1px solid #000000;
+    background-color: #f8a323;
+    border-radius: 8px;
+    margin-top: 25px;
+    margin-left: 45%;
+}
