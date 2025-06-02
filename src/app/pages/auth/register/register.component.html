@@ -108,7 +108,7 @@
     </div>
     <!-- End Alert error section -->
 
-
+    
     <!-- Formulaire -->
     <div class="p-6">
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -223,7 +223,6 @@
           <!-- Bouton -->
           <button
             type="submit"
-            [disabled]="registerForm.invalid"
             [ngClass]="{
             'bg-[#ff9000] text-white border border-[#ff9000] hover:bg-[#e57f00]': registerForm.valid,
             'bg-white text-gray-400 border border-gray-300 cursor-not-allowed': registerForm.invalid

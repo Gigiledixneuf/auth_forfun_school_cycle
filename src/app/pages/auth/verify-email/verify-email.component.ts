@@ -1,8 +1,8 @@
-// verify-email.component.ts
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http'; // ✅ HttpParams importé
+import { HttpClient, HttpParams } from '@angular/common/http'; // 
 import { NgIf } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-verify-email',
@@ -14,7 +14,7 @@ export class VerifyEmailComponent implements OnInit {
   loading = true;
   successMessage = '';
   errorMessage = '';
-  verified = false; // ✅ Ajout de la propriété "verified"
+  verified = false; 
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class VerifyEmailComponent implements OnInit {
         return;
       }
 
-      const url = `http://127.0.0.1:8000/api/verify-email/${id}/${hash}`;
+      const url = environment.apiUrl + `verify-email/${id}/${hash}`;
 
       const httpParams = new HttpParams()
         .set('expires', expires)

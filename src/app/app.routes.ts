@@ -1,48 +1,72 @@
-import { HomeConnectedComponent } from './pages/home/home-connected/home-connected.component';
-import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
+import { AuthService } from './core/services/auth/auth.service';
+
 export const routes: Routes = [
-  //====================== START AUTH PATHS ========================
   {
-    path: 'login',
-    loadComponent: () =>
-      import('./pages/auth/login/login.component').then(
-        (m) => m.LoginComponent
-      ),
+    path : '',
+    title : 'Acceuil - School Cycle',
+    loadComponent:() => import('../app/pages/home/home/home.component').then((m)=> m.HomeComponent),
   },
   {
-    path: 'register',
-    loadComponent: () =>
-      import('./pages/auth/register/register.component').then(
-        (m) => m.RegisterComponent
-      ),
+    path : 'register',
+    title : 'Inscription - School Cycle',
+    loadComponent:() => import('../app/pages/auth/register/register.component').then((m) => m.RegisterComponent),
+  },
+  {
+    path : 'login',
+    title : 'Connexion - School Cycle',
+    loadComponent:() => import('../app/pages/auth/login/login.component').then((m) => m.LoginComponent),
   },
   {
     path : 'verify-email/:id/:hash',
+    title : 'Verification - School Cycle',
     loadComponent : ()=>
       import('./pages/auth/verify-email/verify-email.component').then((m)=> m.VerifyEmailComponent)
   },
+  
   {
     path: 'forgot-password',
+    title : 'Mot de passe oublié - School Cycle',
     loadComponent: () =>
-      import('./pages/auth/reset-password/reset-password.component').then(
-        (m) => m.ResetPasswordComponent
-      ),
+    import('./pages/auth/reset-password/reset-password.component').then(
+      (m) => m.ResetPasswordComponent
+    ),
   },
   {
     path: 'password-reset/:token',
+    title : 'Nouveau mot de passe - School Cycle',
     loadComponent: () =>
       import('../app/pages/auth/new-password/new-password.component').then(
         (m) => m.NewPasswordComponent
       ),
   },
   {
-    path : 'home_connected',
-    loadComponent: () =>
-      import('./pages/home/home-connected/home-connected.component').then(
-        (m) => m.HomeConnectedComponent
-      ),
+    path : 'create-announcement',
+    title : 'Creation Annonce - School Cycle',
+    loadComponent:() => import('../app/pages/announcement/create/create.component').then((m) => m.CreateComponent),
+    canActivate : [()=> inject(AuthService).isLoggIn()] //protection de la route (un peu comme un middlware)
   },
 
-  //====================== END AUTH PATHS ============================
+
+  //pour une page non trouvé on sera redirigé ici
+  {
+    path : '404',
+    title : '404 - School Cycle',
+    loadComponent:()=> import('../app/pages/page-not-found/page-not-found.component').then((m)=> m.PageNotFoundComponent)
+  },
+
+  //pour toute route generique non existante on sera rediriger dans la route 404
+  {
+    path : '**',
+    redirectTo : '404'
+  },
+
+  //pour toute les routes vides on soit rediriger vers l'acceuil 
+  {
+    path : '',
+    pathMatch : 'full',
+    redirectTo : ''
+  }
+
 ];
