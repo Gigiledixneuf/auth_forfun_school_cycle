@@ -2,16 +2,21 @@ import { AnnouncementService } from './../../../core/services/announcement/annou
 import { Component, Input } from '@angular/core';
 import { Announcement } from '../../../core/models/announcement/announcement';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-announcement-card',
-  imports: [  CommonModule],
+  imports: [  CommonModule, RouterLink],
   templateUrl: './announcement-card.component.html',
   styleUrl: './announcement-card.component.css'
 })
 export class AnnouncementCardComponent {
 
+  
   announcementId! : number;
+  storageUrl = environment.storageUrl;
+
   constructor(private announcementService :  AnnouncementService){}
   @Input () announcement! : Announcement
   ngOnInit() {
