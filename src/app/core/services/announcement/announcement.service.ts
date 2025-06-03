@@ -34,6 +34,11 @@ export class AnnouncementService {
     return announcement;
   }
 
+  getSimilarAnnouncements(id: number): Observable<{ data: Announcement[] }> {
+    return this.http.get<{ data: Announcement[] }>(this.url + 'announcements/' + id + '/similar');
+  }
+  
+
 
   getCategories(): Observable<{ data: Category[] }> {
     const categories = this.http.get<{ data: Category[] }>(this.url + 'categories');
