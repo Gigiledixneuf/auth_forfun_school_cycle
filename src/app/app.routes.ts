@@ -47,6 +47,11 @@ export const routes: Routes = [
     loadComponent:() => import('../app/pages/announcement/create/create.component').then((m) => m.CreateComponent),
     canActivate : [()=> inject(AuthService).isLoggIn()] //protection de la route (un peu comme un middlware)
   },
+  {
+    path : 'announcement/:id',
+    title : 'Annonce - School Cycle',
+    loadComponent : ()=> import('../app/pages/announcement/announcement-single/announcement-single.component').then((m)=> m.AnnouncementSingleComponent)
+  },
 
 
   //pour une page non trouvé on sera redirigé ici
@@ -56,17 +61,20 @@ export const routes: Routes = [
     loadComponent:()=> import('../app/pages/page-not-found/page-not-found.component').then((m)=> m.PageNotFoundComponent)
   },
 
+  
+  //pour toute les routes vides on soit rediriger vers l'acceuil 
+  {
+    path : '',
+    pathMatch : 'full',
+    redirectTo : ''
+  },
+
   //pour toute route generique non existante on sera rediriger dans la route 404
   {
     path : '**',
     redirectTo : '404'
   },
 
-  //pour toute les routes vides on soit rediriger vers l'acceuil 
-  {
-    path : '',
-    pathMatch : 'full',
-    redirectTo : ''
-  }
+  
 
 ];

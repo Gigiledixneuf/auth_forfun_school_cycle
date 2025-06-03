@@ -1,0 +1,50 @@
+<div *ngIf="announcement">
+  <h1>{{ announcement.title }}</h1>
+
+  <!-- image principale -->
+  <img
+    [src]="storageUrl + currentImage"
+    alt="Image principale"
+    class="w-full h-64 object-cover mb-4"
+  />
+
+  <!-- galerie de miniatures -->
+  <div class="flex gap-2">
+    <img
+      *ngFor="let photo of announcement.photos"
+      [src]="storageUrl + photo.url"
+      alt="miniature"
+      (click)="changeMainImage(photo.url)"
+      class="w-20 h-20 object-cover cursor-pointer border border-gray-300 hover:border-blue-500"
+    />
+  </div>
+
+  <p>
+    {{
+      announcement.operation_type === "don"
+        ? "Gratuit"
+        : announcement.operation_type === "exchange"
+        ? "Echange"
+        : announcement.price | currency
+    }}
+  </p>
+
+  <h2 >Annonces similaires</h2>
+   <div class=" w-[70%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16 ">
+    @for (annonce of similarAnnouncements; track $index) {
+        <a [routerLink]="['/announcement', annonce.id]">
+
+          <img
+            *ngIf="annonce.photos && annonce.photos.length > 0"
+            [src]="storageUrl + annonce.photos[0].url"
+            alt="{{ annonce.title }}"
+          />
+        </a>
+        <p>{{ annonce.title }}</p>
+      }
+   </div>
+
+
+
+  <button [routerLink]="['']">back</button>
+</div>
