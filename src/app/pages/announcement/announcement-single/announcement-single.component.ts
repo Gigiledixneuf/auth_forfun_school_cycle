@@ -4,10 +4,13 @@ import { Announcement } from '../../../core/models/announcement/announcement';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import {HeaderComponent} from '../../../components/shared/header/header.component';
+import {FooterComponent} from '../../../components/shared/footer/footer.component';
+import {AnnouncementCardComponent} from '../announcement-card/announcement-card.component';
 
 @Component({
   selector: 'app-announcement-single',
-  imports: [NgFor, NgIf, RouterLink, CommonModule],
+  imports: [NgFor, NgIf, RouterLink, CommonModule, HeaderComponent, FooterComponent, AnnouncementCardComponent],
   templateUrl: './announcement-single.component.html',
   styleUrl: './announcement-single.component.css',
 })
@@ -31,7 +34,7 @@ export class AnnouncementSingleComponent {
     });
   }
 
-  
+
   //function pour recuperr l'annonce en detail
   getSingleAnnouncement(){
     this.articleId = Number(this.route.snapshot.paramMap.get('id'));
@@ -52,9 +55,9 @@ export class AnnouncementSingleComponent {
       },
     });
   }
-  
 
-  //function pour recuperr les articles similaires 
+
+  //function pour recuperr les articles similaires
   getSimilarAnnouncement() {
     this.annoncementService.getSimilarAnnouncements(this.articleId).subscribe(
       (res) => {
@@ -66,7 +69,7 @@ export class AnnouncementSingleComponent {
       }
     );
   }
-  
+
   //function pour recuperr changer la photo principale de l'annonce
   changeMainImage(url: string) {
     this.currentImage = url;
