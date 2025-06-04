@@ -52,7 +52,6 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
     // Récupération des catégories et annonces dès le chargement
     this.getCategories();
-    this.getAnnoucements();
 
     // Initialisation du formulaire avec validation
     this.createAnnoucmentForm = this.fb.group({
@@ -101,15 +100,6 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  // Récupère les annonces depuis l'API
-  getAnnoucements() {
-    this.annoucementService.getAnnouncements().subscribe({
-      next: (res) => {
-        this.announcements = res.data; // Stocke les annonces
-        console.log('Annonces:', this.announcements); // Debug
-      },
-    });
-  }
 
   // Gère le changement de fichiers dans l’input type="file"
   onFileChange(event: any) {
