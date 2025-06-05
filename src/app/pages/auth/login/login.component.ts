@@ -66,7 +66,8 @@ export class LoginComponent {
         // Message de succès + redirection après 1,5 seconde
         this.successMessage = 'Connexion réussie. Redirection en cours...';
         setTimeout(() => {
-          this.router.navigate(['/']);
+          //redirige et supprime la route login de l'historique ( plus de retour en arriere )
+          this.router.navigate(['/'], { replaceUrl: true });
         }, 1500);
       },
       error: (err) => {
