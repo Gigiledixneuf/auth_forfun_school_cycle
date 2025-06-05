@@ -55,6 +55,10 @@ export const routes: Routes = [
     title : 'Annonce - School Cycle',
     loadComponent : ()=> import('../app/pages/announcement/announcement-single/announcement-single.component').then((m)=> m.AnnouncementSingleComponent)
   },
+  {
+    path : 'annoncement-explorer',
+    loadComponent : ()=> import('../app/pages/announcement/announcement-explorer/announcement-explorer.component').then((m)=> m.AnnouncementExplorerComponent)
+  },
 
 
   //pour une page non trouvé on sera redirigé ici
