@@ -14,17 +14,6 @@ export class AuthService {
 
   constructor(private http : HttpClient, private router : Router) { }
 
-  //methode pour la protection en guard des routes
-  isLoggIn = () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      return true
-    }else{
-      this.router.navigate(['/']);
-      return false
-    }
-  }
-
   /**
    * Envoie les informations de connexion à l’API et attend une réponse typée AuthLoginResponse.
    * @param data Les informations de connexion (email + mot de passe)
