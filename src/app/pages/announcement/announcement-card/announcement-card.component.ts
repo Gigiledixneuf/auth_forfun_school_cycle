@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class AnnouncementCardComponent {
 
-  
+
   announcementId! : number;
   storageUrl = environment.storageUrl;
 
@@ -34,10 +34,10 @@ export class AnnouncementCardComponent {
       error: (err) => {
         const token = localStorage.getItem('token')
         console.log(token);
-        
+
         console.error("Erreur ajout favori :", err);
       }
     });
   }
-  
+
 }

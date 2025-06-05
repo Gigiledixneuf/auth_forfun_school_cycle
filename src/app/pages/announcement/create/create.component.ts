@@ -11,11 +11,12 @@ import { Category } from '../../../core/models/announcement/category';
 import { NgFor, NgIf } from '@angular/common';
 import { HeaderComponent } from '../../../components/shared/header/header.component';
 import { Announcement } from '../../../core/models/announcement/announcement';
+import {FooterComponent} from '../../../components/shared/footer/footer.component';
 
 @Component({
   selector: 'app-create', // Sélecteur utilisé dans le HTML parent
   standalone: true, // Composant autonome (pas besoin d’être déclaré dans un module)
-  imports: [ReactiveFormsModule, NgIf, HeaderComponent, NgFor], // Importation des modules utilisés dans le template HTML
+  imports: [ReactiveFormsModule, NgIf, HeaderComponent, NgFor, FooterComponent], // Importation des modules utilisés dans le template HTML
   templateUrl: './create.component.html', // Chemin vers le fichier HTML du composant
   styleUrls: ['./create.component.css'], // Chemin vers le fichier CSS du composant
 })
@@ -136,6 +137,12 @@ export class CreateComponent implements OnInit {
       return;
     }
 
+    // Vérifie si des photos ont été sélectionnées (obligatoire)
+    if (this.selectedFiles.length === 0) {
+      this.errorMsg = 'Veuillez ajouter au moins une photo pour votre annonce.';
+      return;
+    }
+
     // Prépare les données sous forme de FormData (pour inclure les fichiers)
     const formData = new FormData();
     const formValue = this.createAnnoucmentForm.value;
@@ -164,7 +171,7 @@ export class CreateComponent implements OnInit {
         console.log(res);
       },
       error: (err) => {
-        // Si erreur : message d’erreur
+        // Si erreur : message d'erreur
         this.errorMsg = err.error.message || 'Une erreur est survenue.';
         this.isSubmited = false;
       },
