@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Announcement, AnnouncementData } from '../../models/announcement/announcement';
 import { Category } from '../../models/announcement/category';
 import { Favorite } from '../../models/announcement/favorite';
+import {PaginatedAnnouncements} from '../../models/announcement/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class AnnouncementService {
   private url = environment.apiUrl;
   constructor(private http : HttpClient) { }
 
-  //function pour recuperer le token 
+  //function pour recuperer le token
   authToken(){
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -24,8 +25,8 @@ export class AnnouncementService {
   }
 
   //methode pour recuperer les annonces
-  getAnnouncements(): Observable<{ data: Announcement[] }> {
-    const announcements = this.http.get<{ data: Announcement[] }>(this.url + 'announcements');
+  getAnnouncements(page : number = 1): Observable<PaginatedAnnouncements> {
+    const announcements = this.http.get<PaginatedAnnouncements>(this.url + 'announcements?page=' + page);
     return announcements;
   }
 
@@ -37,7 +38,7 @@ export class AnnouncementService {
   getSimilarAnnouncements(id: number): Observable<{ data: Announcement[] }> {
     return this.http.get<{ data: Announcement[] }>(this.url + 'announcements/' + id + '/similar');
   }
-  
+
 
 
   getCategories(): Observable<{ data: Category[] }> {

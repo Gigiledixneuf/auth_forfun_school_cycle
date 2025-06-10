@@ -144,7 +144,7 @@
               </div>
 
               <div *ngIf="(isSubmited || createAnnoucmentForm.get('title')?.touched) && createAnnoucmentForm.get('title')?.errors?.['maxlength']" class="mt-2 text-sm text-red-600">
-                <span class="font-medium">Erreur :</span> Le titre ne doit pas dépasser 30 caractères.
+                <span class="font-medium">Erreur :</span> Le titre ne doit pas dépasser 20 caractères.
               </div>
 
             </div>

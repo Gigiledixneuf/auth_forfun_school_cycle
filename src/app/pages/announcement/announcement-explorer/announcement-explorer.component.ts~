@@ -1,0 +1,60 @@
+import { Component } from '@angular/core';
+import {HeaderComponent} from '../../../components/shared/header/header.component';
+import {AnnouncementListComponent} from '../announcement-list/announcement-list.component';
+import {FooterComponent} from '../../../components/shared/footer/footer.component';
+import {AnnouncementCardComponent} from '../announcement-card/announcement-card.component';
+import {NgForOf, NgIf} from '@angular/common';
+import {Announcement} from '../../../core/models/announcement/announcement';
+import {PaginationMeta, PaginationUrls} from '../../../core/models/announcement/pagination';
+import {AnnouncementService} from '../../../core/services/announcement/announcement.service';
+
+@Component({
+  selector: 'app-announcement-explorer',
+    imports: [
+        HeaderComponent,
+        AnnouncementListComponent,
+        FooterComponent,
+        AnnouncementCardComponent,
+        NgForOf,
+        NgIf
+    ],
+  templateUrl: './announcement-explorer.component.html',
+  styleUrl: './announcement-explorer.component.css'
+})
+export class AnnouncementExplorerComponent {
+  announcements!: Announcement[];
+  paginationMeta!: PaginationMeta;
+  paginationUrls!: PaginationUrls;
+  constructor(private announcementService: AnnouncementService) { }
+
+  ngOnInit() {
+    this.getAnnoucements();
+  }
+
+
+  // Récupère les annonces depuis l'API
+  getAnnoucements(page : number = 1) {
+    this.announcementService.getAnnouncements(page).subscribe({
+      next: (res) => {
+        this.announcements = res.data;
+        this.paginationMeta = res.meta;
+        this.paginationUrls = res.links;
+        console.log('Annonces:', this.announcements);
+        console.log('paginationMeta:', res.meta);
+        console.log('paginationUrls:', res.links);// Debug
+      },
+      error:(err) => {
+        console.error("Erreur lors du chargement des annonces :", err);
+      }
+    });
+  }
+
+  onPageChange(url: string | null | undefined): void {
+    if (typeof url !== 'string') return;
+
+    const pageParam = new URL(url).searchParams.get('page');
+    const page = pageParam ? +pageParam : 1;
+    this.getAnnoucements(page);
+  }
+
+}

@@ -56,8 +56,8 @@ export class CreateComponent implements OnInit {
 
     // Initialisation du formulaire avec validation
     this.createAnnoucmentForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
+      title: ['', Validators.required, Validators.minLength(5), Validators.maxLength(30)],
+      description: ['', Validators.required, Validators.minLength(10), Validators.maxLength(500)],
       operation_type: ['', Validators.required], // achat ou vente
       price: [''], // Requis uniquement si operation_type est "sale"
       state: ['', Validators.required],
