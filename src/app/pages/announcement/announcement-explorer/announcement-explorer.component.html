@@ -1,1 +1,134 @@
-<p>announcement-explorer works!</p>
+<app-header></app-header>
+<div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow border border-gray-200">
+  <h1 class="text-2xl font-bold text-blue-700 mb-6">Rechercher des fournitures</h1>
+
+  <!-- Barre de recherche -->
+  <div class="flex flex-col md:flex-row gap-4 mb-4">
+    <div class="flex-1 relative">
+      <input type="text" placeholder="Que recherchez-vous ?" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </div>
+    <div class="flex-1 relative">
+      <input type="text" placeholder="Localisation" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+    </div>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <span>Rechercher</span>
+    </button>
+  </div>
+
+  <!-- Bouton Filtres avancés -->
+  <button id="toggle-filters" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 mb-4">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z"/>
+    </svg>
+    <span>Filtres avancés</span>
+    <svg id="arrow-icon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <!-- Filtres avancés -->
+  <div id="filters-container" class="overflow-hidden transition-all duration-500 ease-in-out max-h-0">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4">
+      <!-- Type d'annonce -->
+      <div>
+        <h3 class="font-semibold text-gray-700 mb-3">Type d'annonce</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Vente</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Échange</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Don</span></label>
+        </div>
+      </div>
+
+      <!-- Niveau scolaire -->
+      <div>
+        <h3 class="font-semibold text-gray-700 mb-3">Niveau scolaire</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Primaire</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Collège</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Lycée</span></label>
+        </div>
+      </div>
+
+      <!-- Matière -->
+      <div>
+        <h3 class="font-semibold text-gray-700 mb-3">Matière</h3>
+        <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+          <option>Toutes les matières</option>
+          <option>Mathématiques</option>
+          <option>Français</option>
+          <option>Sciences</option>
+          <option>Anglais</option>
+        </select>
+      </div>
+
+      <!-- État -->
+      <div>
+        <h3 class="font-semibold text-gray-700 mb-3">État</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Neuf</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Comme neuf</span></label>
+          <label class="flex items-center space-x-2"><input type="checkbox" class="text-blue-600"> <span>Usagé</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" w-[70%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16 ">
+  <app-announcement-card
+    *ngFor="let announcement of announcements"
+    [announcement]="announcement">
+  </app-announcement-card>
+</div>
+<div class="mb-16 flex justify-center" *ngIf="paginationMeta?.links?.length">
+  <nav aria-label="Page navigation">
+    <ul class="flex items-center -space-x-px h-8 text-sm">
+
+      <li *ngFor="let link of paginationMeta.links">
+        <button
+          [disabled]="!link.url"
+          (click)="onPageChange(link.url)"
+          class="flex items-center justify-center px-3 h-8 leading-tight border transition-colors duration-200"
+          [ngClass]="{
+            'rounded-s-lg': link.label.includes('Previous'),
+            'rounded-e-lg': link.label.includes('Next'),
+            'text-white bg-[#FF8C00] border-[#FF8C00] hover:bg-[#FF9D1A] hover:border-[#FF9D1A]': link.active,
+            'text-gray-600 bg-white border-gray-200 hover:bg-orange-50 hover:text-[#FF8C00]': !link.active,
+            'cursor-not-allowed opacity-50': !link.url
+          }"
+        >
+          <span class="sr-only" *ngIf="link.label.includes('Previous')">Précédent</span>
+          <span class="sr-only" *ngIf="link.label.includes('Next')">Suivant</span>
+
+          <svg *ngIf="link.label.includes('Previous')" class="w-2.5 h-2.5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
+
+          <svg *ngIf="link.label.includes('Next')" class="w-2.5 h-2.5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+
+          <span [innerHTML]="link.label" *ngIf="!link.label.includes('Previous') && !link.label.includes('Next')"></span>
+        </button>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+
+
+
+
+
+
+<app-footer></app-footer>

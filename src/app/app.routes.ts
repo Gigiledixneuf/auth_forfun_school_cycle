@@ -57,6 +57,7 @@ export const routes: Routes = [
   },
   {
     path : 'annoncement-explorer',
+    title : 'Explorer Annonce - School Cycle',
     loadComponent : ()=> import('../app/pages/announcement/announcement-explorer/announcement-explorer.component').then((m)=> m.AnnouncementExplorerComponent)
   },
 

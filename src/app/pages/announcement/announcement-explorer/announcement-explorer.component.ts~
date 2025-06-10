@@ -3,7 +3,7 @@ import {HeaderComponent} from '../../../components/shared/header/header.componen
 import {AnnouncementListComponent} from '../announcement-list/announcement-list.component';
 import {FooterComponent} from '../../../components/shared/footer/footer.component';
 import {AnnouncementCardComponent} from '../announcement-card/announcement-card.component';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {Announcement} from '../../../core/models/announcement/announcement';
 import {PaginationMeta, PaginationUrls} from '../../../core/models/announcement/pagination';
 import {AnnouncementService} from '../../../core/services/announcement/announcement.service';
@@ -12,11 +12,11 @@ import {AnnouncementService} from '../../../core/services/announcement/announcem
   selector: 'app-announcement-explorer',
     imports: [
         HeaderComponent,
+        AnnouncementListComponent,
         FooterComponent,
         AnnouncementCardComponent,
         NgForOf,
-        NgIf,
-        NgClass
+        NgIf
     ],
   templateUrl: './announcement-explorer.component.html',
   styleUrl: './announcement-explorer.component.css'
