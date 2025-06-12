@@ -56,10 +56,10 @@ export class CreateComponent implements OnInit {
 
     // Initialisation du formulaire avec validation
     this.createAnnoucmentForm = this.fb.group({
-      title: ['', Validators.required, Validators.minLength(5), Validators.maxLength(30)],
-      description: ['', Validators.required, Validators.minLength(10), Validators.maxLength(500)],
-      operation_type: ['', Validators.required], // achat ou vente
-      price: [''], // Requis uniquement si operation_type est "sale"
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      operation_type: ['', Validators.required],
+      price: [''], 
       state: ['', Validators.required],
       exchange_location_address: ['', Validators.required],
       exchange_location_lng: ['', Validators.required],
@@ -169,11 +169,17 @@ export class CreateComponent implements OnInit {
         this.selectedFiles = [];
         this.previewImages = [];
         console.log(res);
+        setTimeout(()=>{
+          this.successMsg = ''
+        }, 2000)
       },
       error: (err) => {
         // Si erreur : message d'erreur
         this.errorMsg = err.error.message || 'Une erreur est survenue.';
         this.isSubmited = false;
+        setTimeout(()=>{
+          this.errorMsg = ''
+        }, 2000)
       },
     });
   }
