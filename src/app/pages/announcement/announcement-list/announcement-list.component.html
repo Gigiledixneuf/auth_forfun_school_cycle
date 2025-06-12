@@ -1,12 +1,23 @@
 <h3 class="text-3xl text-center mb-2 font-bold mt-16">Annonces Recentes</h3>
 <p class="text-xl text-gray-500 text-center mb-20">Découvrez les derniers fournitures disponibles sur notre plateforme </p>
-
-<div class=" w-[70%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16 ">
+@if (announcements.length == 0) {
+  <div class="max-w-6xl mx-auto text-center mt-12 mb-12">
+    <h3 class="text sm:text-1xl md:text-2xl font-bold mb-4">
+      Aucune annonce disponible en ce moment ❌
+    </h3>
+    <p class="mb-6 max-w-2xl mx-auto text-sm sm:text-base">
+      Rejoindre notre communauté pour publier des annonces.
+    </p>
+  </div>
+}@else {
+  <div class=" w-[70%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16 ">
     <app-announcement-card
       *ngFor="let announcement of announcements"
       [announcement]="announcement">
     </app-announcement-card>
 </div>
+}
+
 
 
 
