@@ -17,7 +17,9 @@
   <span
     class="absolute top-3 right-3 bg-[#FF9000] text-white text-xs px-3 py-1 rounded-full shadow"
   >
-    {{ announcement.operation_type }}
+    {{ announcement.operation_type == 'sale' ? 'VENTE'
+       :announcement.operation_type == 'exchange'? 'ECHANGE' 
+       :announcement.operation_type | uppercase }}
   </span>
 
   <!-- Bouton de favoris -->
