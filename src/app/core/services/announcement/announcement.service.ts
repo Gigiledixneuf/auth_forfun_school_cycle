@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -24,11 +24,48 @@ export class AnnouncementService {
     return headers;
   }
 
-  //methode pour recuperer les annonces
-  getAnnouncements(page : number = 1): Observable<PaginatedAnnouncements> {
-    const announcements = this.http.get<PaginatedAnnouncements>(this.url + 'announcements?page=' + page);
-    return announcements;
+  //methode de recuperation et filtrage des annonces
+  getAnnouncements(page: number = 1, filters: any = {}): Observable<PaginatedAnnouncements> {
+    let params = new HttpParams()
+      .set('page', page)
+      .set('per_page', 12);
+
+    // Recherche
+    if (filters.search) {
+      params = params.set('search', filters.search);
+    }
+
+    //  Type d’opération
+    if (Array.isArray(filters.operation_type) && filters.operation_type.length) {
+      params = params.set('operation_type', filters.operation_type.join(','));
+    }
+
+    //  États
+    if (Array.isArray(filters.state) && filters.state.length) {
+      params = params.set('state', filters.state.join(','));
+    }
+
+    //  Prix
+    if (filters.min_price != null) {
+      params = params.set('min_price', filters.min_price);
+    }
+
+    if (filters.max_price != null) {
+      params = params.set('max_price', filters.max_price);
+    }
+
+    // Tri (optionnel)
+    if (filters.sort_field) {
+      params = params.set('sort_field', filters.sort_field);
+    }
+
+    if (filters.sort_direction) {
+      params = params.set('sort_direction', filters.sort_direction);
+    }
+
+    return this.http.get<PaginatedAnnouncements>(this.url + 'announcements', {params});
   }
+
 
   getAnnoucement(id: number) :Observable<{ data: Announcement }> {
     const announcement = this.http.get<{ data: Announcement }>(this.url + 'announcements/' + id);
