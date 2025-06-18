@@ -102,7 +102,7 @@
             <input
               id="email"
               type="email"
-              placeholder="email@example.com"
+              placeholder="nom@exemple.fr"
               formControlName="email"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#ff9000] focus:border-[#ff9000]"
             />
@@ -144,13 +144,11 @@
           <!-- Submit -->
           <button
             type="submit"
-            [ngClass]="{
-            'bg-[#ff9000] text-white border border-[#ff9000] hover:bg-[#e57f00]': loginForm.valid,
-            'bg-white text-gray-400 border border-gray-300 cursor-not-allowed': loginForm.invalid
-             }"
-            class="w-full py-2 px-4 rounded-md font-semibold transition-colors duration-300"
+            [disabled]="loading"
+            class="w-full bg-[#ff9000] hover:bg-[#e68200] text-white py-2 px-4 rounded-md transition-colors"
           >
-            Se connecter
+            <span *ngIf="loading">Connexion...</span>
+            <span *ngIf="!loading">Connexion</span>
           </button>
         </div>
       </form>
@@ -169,7 +167,7 @@
       <div class="mt-6 text-center text-sm">
         <span class="text-gray-600">Vous n'avez pas de compte? </span>
         <a [routerLink]="['/register']"
-          class="text-[#ff9000] hover:text-[#e68200] font-medium"
+           class="text-[#ff9000] hover:text-[#e68200] font-medium"
         >
           S'inscrire
         </a>
