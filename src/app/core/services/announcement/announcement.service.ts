@@ -26,44 +26,48 @@ export class AnnouncementService {
 
   //methode de recuperation et filtrage des annonces
   getAnnouncements(page: number = 1, filters: any = {}): Observable<PaginatedAnnouncements> {
+    // Définition des paramètres de base : page actuelle et nombre d’éléments par page
     let params = new HttpParams()
       .set('page', page)
       .set('per_page', 12);
 
-    // Recherche
+    // 🔍 Filtrage par mot-clé de recherche (titre ou description)
     if (filters.search) {
       params = params.set('search', filters.search);
     }
 
-    //  Type d’opération
+    // Filtrage par type d’opération (ex: sale, exchange, don)
     if (Array.isArray(filters.operation_type) && filters.operation_type.length) {
       params = params.set('operation_type', filters.operation_type.join(','));
     }
 
-    //  États
+    //  Filtrage par état (ex: new, like_new, used)
     if (Array.isArray(filters.state) && filters.state.length) {
       params = params.set('state', filters.state.join(','));
     }
 
-    //  Prix
+    //  Filtrage par prix minimum
     if (filters.min_price != null) {
       params = params.set('min_price', filters.min_price);
     }
 
+    //  Filtrage par prix maximum
     if (filters.max_price != null) {
       params = params.set('max_price', filters.max_price);
     }
 
-    // Tri (optionnel)
+    // Tri par champ spécifique si présent (ex: created_at, title, etc.)
     if (filters.sort_field) {
       params = params.set('sort_field', filters.sort_field);
     }
 
+    //  Direction du tri (ascendant ou descendant)
     if (filters.sort_direction) {
       params = params.set('sort_direction', filters.sort_direction);
     }
 
-    return this.http.get<PaginatedAnnouncements>(this.url + 'announcements', {params});
+    // Envoi de la requête HTTP GET avec les paramètres construits
+    return this.http.get<PaginatedAnnouncements>(this.url + 'announcements', { params });
   }
 
 
